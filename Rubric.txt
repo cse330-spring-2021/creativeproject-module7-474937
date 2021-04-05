@@ -1,0 +1,28 @@
+The goal of the project is to make a website that can record math/science problems and produce solutions to problems of the same set-up. For example, if a user adds a problem to find the roots of a quadratic equation, the website can give the answers provided the coefficients. An example of a science problem would be to find density given mass and volume.
+
+
+Rubric (5 points)
+
+Languages/Framework (30 points)
+-MongoDB: 10 points
+-Express: 10 points
+-Angular: 10 points
+-Node: 0 points
+
+Functionality (40 points)
+-Users can create accounts, login, and logout: 10 points
+-Users can add/edit/delete math or science problems: 10 points
+-Each problem gives the correct answer given proper inputs: 5 points
+-Users can attach image or pdf files of their work for a problem: 5 points
+-Users can publish their problems for other users to see: 5 points
+-Users can add public problems to their own collection: 5 points
+
+Best Practices (5 points)
+-Pages pass the JavaScript validator: 2 points
+-Proper comments and format: 3 points
+
+Creative Portion (20 points)
+
+-------
+
+Checked by Max Hanley on 2021/4/5
