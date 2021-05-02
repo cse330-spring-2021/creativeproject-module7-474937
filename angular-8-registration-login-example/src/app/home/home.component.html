@@ -1,5 +1,35 @@
 ﻿<h1>Hi {{currentUser.firstName}}!</h1>
 <p>You have successfully logged in!</p>
+<h2>Submit a Problem</h2>
+<form [formGroup]="problemForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="name">Problem Name</label>
+        <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">Problem name is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="operations">Operations</label>
+        <input type="text" formControlName="operations" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.operations.errors }" />
+        <div *ngIf="submitted && f.operations.errors" class="invalid-feedback">
+            <div *ngIf="f.operations.errors.required">Operations are required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="submitType">Options</label>
+        <select formControlName="submitType" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.submitType.errors }">
+            <option value="add">Add Problem</option>
+            <option value="edit">Edit Problem</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Submit
+        </button>
+    </div>
+</form>
 <h3>All submitted problems:</h3>
 <ul>
     <li *ngFor="let problem of problems">
@@ -7,6 +37,7 @@
         <ul>
             <li>Owner: {{problem.owner}}</li>
             <li>Operations: {{problem.operations}}</li>
+            <li>ID: {{problem.id}}</li>
         </ul>
     </li>
 </ul>
