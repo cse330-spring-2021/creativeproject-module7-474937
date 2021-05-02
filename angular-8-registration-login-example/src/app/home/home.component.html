@@ -1,9 +1,12 @@
 ﻿<h1>Hi {{currentUser.firstName}}!</h1>
-<p>You're logged in with Angular 8!!</p>
-<h3>All registered users:</h3>
+<p>You have successfully logged in!</p>
+<h3>All submitted problems:</h3>
 <ul>
-    <li *ngFor="let user of users">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+    <li *ngFor="let problem of problems">
+        {{problem.name}} - <a (click)="deleteProblem(problem.id)" class="text-danger" *ngIf="problem.owner == currentUser.username">Delete</a>
+        <ul>
+            <li>Owner: {{problem.owner}}</li>
+            <li>Operations: {{problem.operations}}</li>
+        </ul>
     </li>
 </ul>

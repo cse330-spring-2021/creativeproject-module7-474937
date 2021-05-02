@@ -2,33 +2,33 @@
 import { first } from 'rxjs/operators';
 
 import { User } from '@/_models';
-import { UserService, AuthenticationService } from '@/_services';
+import { ProblemService, AuthenticationService } from '@/_services';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
     currentUser: User;
-    users = [];
+    problems = [];
 
     constructor(
         private authenticationService: AuthenticationService,
-        private userService: UserService
+        private problemService: ProblemService
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
     }
 
     ngOnInit() {
-        this.loadAllUsers();
+        this.loadAllProblems();
     }
 
-    deleteUser(id: number) {
-        this.userService.delete(id)
+    deleteProblem(id: number) {
+        this.problemService.deleteProblem(id)
             .pipe(first())
-            .subscribe(() => this.loadAllUsers());
+            .subscribe(() => this.loadAllProblems());
     }
 
-    private loadAllUsers() {
-        this.userService.getAll()
+    private loadAllProblems() {
+        this.problemService.getAllProblems()
             .pipe(first())
-            .subscribe(users => this.users = users);
+            .subscribe(problems => this.problems = problems);
     }
 }

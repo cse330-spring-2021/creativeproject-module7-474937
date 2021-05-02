@@ -5,8 +5,8 @@ const problemSchema = new Schema({
     name: { type: String, unique: true, required: true },
     operations: { type: String, required: true },
     owner: { type: String, required: true },
+    answers: { type: String},
     private: { type: Boolean},
-    viewers: { type: [String]},
     createdDate: { type: Date, default: Date.now }
 });
 

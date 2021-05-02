@@ -32,9 +32,6 @@ function _delete(req, res, next) {
         .catch(err => next(err));
 }
 
-
-
-
 function getAll(req, res, next) {
     problemService.getAll()
         .then(users => res.json(users))
