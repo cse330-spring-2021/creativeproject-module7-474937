@@ -15,7 +15,17 @@ router.delete('/:id', _delete);
 module.exports = router;
 
 function addProblem(req, res, next) {
-    problemService.addProblem(req.body)
+
+    let myProblem = 
+    { 
+        "name": req.body.name,
+        "operations": req.body.operations,
+        "private": req.body.private,
+        "ownerID": req.user.sub,
+        "ownerName": req.body.ownerName
+    };
+
+    problemService.addProblem(myProblem)
         .then(() => res.json({}))
         .catch(err => next(err));
 }
@@ -33,7 +43,7 @@ function _delete(req, res, next) {
 }
 
 function getAll(req, res, next) {
-    problemService.getAll()
+    problemService.getAll(req.user.sub)
         .then(users => res.json(users))
         .catch(err => next(err));
 }

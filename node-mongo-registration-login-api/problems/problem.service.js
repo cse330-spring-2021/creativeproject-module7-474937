@@ -43,6 +43,6 @@ async function getById(id) {
     return await Problem.findById(id);
 }
 
-async function getAll() {
-    return await Problem.find();
+async function getAll(ownerId) {
+    return await Problem.find({$or:[{ private: false }, { ownerID: ownerId}]});
 }

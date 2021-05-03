@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const problemSchema = new Schema({
     name: { type: String, unique: true, required: true },
     operations: { type: String, required: true },
-    owner: { type: String, required: true },
+    ownerID: { type: String, required: true },
+    ownerName: { type: String},
     answers: { type: String},
     private: { type: Boolean},
     createdDate: { type: Date, default: Date.now }

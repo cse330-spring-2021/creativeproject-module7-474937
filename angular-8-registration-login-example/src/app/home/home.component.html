@@ -17,10 +17,18 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="answers">Answer (Optional)</label>
+        <input type="text" formControlName="answers" class="form-control" />
+    </div>
+    <div class="form-group">
         <label for="submitType">Options</label>
         <select formControlName="submitType" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.submitType.errors }">
             <option value="add">Add Problem</option>
             <option value="edit">Edit Problem</option>
+        </select>
+        <select formControlName="privacy" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.submitType.errors }">
+            <option value="private">Private</option>
+            <option value="public">Public</option>
         </select>
     </div>
     <div class="form-group">
@@ -33,11 +41,12 @@
 <h3>All submitted problems:</h3>
 <ul>
     <li *ngFor="let problem of problems">
-        {{problem.name}} - <a (click)="deleteProblem(problem.id)" class="text-danger" *ngIf="problem.owner == currentUser.username">Delete</a>
+        {{problem.name}} - <a (click)="copyProblem(problem.id)">Add to Collection</a> - <a (click)="deleteProblem(problem.id)" class="text-danger" *ngIf="problem.ownerName == currentUser.username">Delete</a>
         <ul>
-            <li>Owner: {{problem.owner}}</li>
+            <li>Owner: {{problem.ownerName}}</li>
+            <li>Privacy: {{problem.private}}</li>
             <li>Operations: {{problem.operations}}</li>
-            <li>ID: {{problem.id}}</li>
+            <li>Answer: {{problem.answers}}</li>
         </ul>
     </li>
 </ul>

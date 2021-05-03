@@ -1,7 +1,8 @@
 export class Problem {
     name: string;
     operations: string;
-    owner: string;
+    ownerName: string;
+    ownerID: string;
     answers: string;
     private: boolean;
 }

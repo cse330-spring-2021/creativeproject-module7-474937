@@ -19,14 +19,12 @@ export class ProblemService {
     }
 
     addProblem(problem: Problem) {
-        problem.owner = this.currentUserSubject.value.username;
-        problem.private = false;
+        problem.ownerName = this.currentUserSubject.value.username;
         return this.http.post(`${config.apiUrl}/problems/addProblem`, problem);
     }
 
     editProblem(problem: Problem, id: number) {
-        problem.owner = this.currentUserSubject.value.username;
-        problem.private = false;
+        problem.ownerName = this.currentUserSubject.value.username;
         return this.http.put(`${config.apiUrl}/problems/${id}`, problem);
     }
 

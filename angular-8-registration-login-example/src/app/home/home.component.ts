@@ -1,5 +1,4 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
@@ -17,7 +16,6 @@ export class HomeComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private router: Router,
         private authenticationService: AuthenticationService,
         private problemService: ProblemService,
         private alertService: AlertService
@@ -30,6 +28,9 @@ export class HomeComponent implements OnInit {
             name: ['', Validators.required],
             operations: ['', Validators.required],
             submitType: ['', Validators.required],
+            privacy: ['', Validators.required],
+            private: [false],
+            answers: ['']
         });
 
         this.loadAllProblems();
@@ -60,6 +61,13 @@ export class HomeComponent implements OnInit {
             return;
         }
 
+        if (this.problemForm.value.privacy == "private") {
+            this.problemForm.value.private = true;
+        }
+        else {
+            this.problemForm.value.private = false;
+        }
+
         if (this.problemForm.value.submitType == 'add') {
             this.problemService.addProblem(this.problemForm.value)
             .pipe(first())
@@ -74,7 +82,18 @@ export class HomeComponent implements OnInit {
                 });
         }
         else if (this.problemForm.value.submitType == 'edit') {
-            var id = this.problems.find(element => element.name == this.problemForm.value.name).id;
+            var targetProblem = this.problems.find(element => element.name == this.problemForm.value.name);
+
+            if (!targetProblem) {
+                this.alertService.error('There is no problem by this name to edit.');
+                return;
+            }
+
+            if (this.currentUser.username != targetProblem.ownerName) {
+                this.alertService.error('You are not the owner of this problem.');
+                return;
+            }
+            var id = targetProblem.id;
 
             this.problemService.editProblem(this.problemForm.value, id)
             .pipe(first())
