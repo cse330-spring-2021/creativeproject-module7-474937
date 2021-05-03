@@ -29,7 +29,7 @@ export class ProblemService {
     }
 
     copyProblem(id: number) {
-        return this.http.post(`${config.apiUrl}/problems/copyProblem`, id);
+        return this.http.post(`${config.apiUrl}/problems/copyProblem`, {id});
     }
 
     deleteProblem(id: number) {

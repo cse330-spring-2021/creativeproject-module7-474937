@@ -47,13 +47,23 @@ export class HomeComponent implements OnInit {
     copyProblem(id: number) {
         this.problemService.copyProblem(id)
             .pipe(first())
-            .subscribe(() => this.loadAllProblems());
+            .subscribe(
+                data => {
+                    this.alertService.success('Problem successfully copied', true);
+                    this.loadAllProblems();
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
     }
 
     private loadAllProblems() {
         this.problemService.getAllProblems()
             .pipe(first())
             .subscribe(problems => this.problems = problems);
+
+        
     }
 
     onSubmit() {

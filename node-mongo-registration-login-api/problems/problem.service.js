@@ -37,19 +37,20 @@ async function editProblem(id, problemParam) {
     await currentProblem.save();
 }
 
-async function copyProblem(id, ownerId) {
-    const newOwner = await User.findById(ownerId);
+async function copyProblem(id, ownerID) {
+    const newOwner = await User.findById(ownerID);
     const currentProblem = await Problem.findById(id);
 
     if (!currentProblem) throw 'Problem not found';
 
-    let newProblem = new Problem();
-
-    Object.assign(newProblem, currentProblem);
-
-    newProblem.name = newProblem.name + " copy for " + newOwner.username;
-    newProblem.ownerID = ownerId;
-    newProblem.ownerName = newOwner.username;
+    let newProblem = new Problem({
+        name: currentProblem.name + " (copy for " + newOwner.username + ")",
+        operations: currentProblem.operations,
+        ownerID: ownerID,
+        ownerName: newOwner.username,
+        answers: currentProblem.answers,
+        private: currentProblem.private
+    });
 
     await newProblem.save();
 }
