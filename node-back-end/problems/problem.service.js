@@ -31,7 +31,7 @@ async function editProblem(id, problemParam) {
     if (currentProblem.name !== problemParam.name && await Problem.findOne({ name: problemParam.name })) {
         throw 'Problem name "' + problemParam.name + '" is already taken';
     }
-
+    
     Object.assign(currentProblem, problemParam);
 
     await currentProblem.save();

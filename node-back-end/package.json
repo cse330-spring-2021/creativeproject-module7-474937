@@ -1,11 +1,11 @@
 {
-    "name": "node-mongo-registration-login-api",
+    "name": "creative-project-node",
     "version": "1.0.0",
     "description": "NodeJS + MongoDB API for User Management, Authentication and Registration",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cornflourblue/node-mongo-registration-login-api.git"
+        "url": "https://github.com/cse330-spring-2021/creativeproject-module7-474937"
     },
     "scripts": {
         "start": "node ./server.js",

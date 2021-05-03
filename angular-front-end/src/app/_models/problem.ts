@@ -5,4 +5,5 @@ export class Problem {
     ownerID: string;
     answers: string;
     private: boolean;
+    tags: [string];
 }

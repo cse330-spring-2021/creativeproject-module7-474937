@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cornflourblue/angular-8-registration-login-example.git"
+        "url": "https://github.com/cse330-spring-2021/creativeproject-module7-474937"
     },
     "scripts": {
         "build": "webpack --mode production",

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { User } from '@/_models';
-import { AlertService, ProblemService, AuthenticationService } from '@/_services';
+import { AlertService, ProblemService, UserService, AuthenticationService } from '@/_services';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
@@ -13,11 +13,13 @@ export class HomeComponent implements OnInit {
     returnUrl: string;
     currentUser: User;
     problems = [];
+    users = [];
 
     constructor(
         private formBuilder: FormBuilder,
         private authenticationService: AuthenticationService,
         private problemService: ProblemService,
+        private userService: UserService,
         private alertService: AlertService
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
@@ -30,10 +32,12 @@ export class HomeComponent implements OnInit {
             submitType: ['', Validators.required],
             privacy: ['', Validators.required],
             private: [false],
-            answers: ['']
+            answers: [''],
+            tags: ['']
         });
 
         this.loadAllProblems();
+        this.loadAllUsers();
     }
 
     get f() { return this.problemForm.controls; }
@@ -62,8 +66,12 @@ export class HomeComponent implements OnInit {
         this.problemService.getAllProblems()
             .pipe(first())
             .subscribe(problems => this.problems = problems);
+    }
 
-        
+    private loadAllUsers() {
+        this.userService.getAll()
+            .pipe(first())
+            .subscribe(users => this.users = users);
     }
 
     onSubmit() {

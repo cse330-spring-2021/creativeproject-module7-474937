@@ -23,7 +23,8 @@ function addProblem(req, res, next) {
         "operations": req.body.operations,
         "private": req.body.private,
         "ownerID": req.user.sub,
-        "ownerName": req.body.ownerName
+        "ownerName": req.body.ownerName,
+        "tags": req.body.tags
     };
 
     problemService.addProblem(myProblem)
@@ -38,6 +39,7 @@ function copyProblem(req, res, next) {
 }
 
 function editProblem(req, res, next) {
+    console.log(req);
     problemService.editProblem(req.params.id, req.body)
         .then(() => res.json({}))
         .catch(err => next(err));

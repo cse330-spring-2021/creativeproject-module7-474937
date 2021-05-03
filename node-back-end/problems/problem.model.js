@@ -8,6 +8,8 @@ const problemSchema = new Schema({
     ownerName: { type: String},
     answers: { type: String},
     private: { type: Boolean},
+    likes: { type: Number},
+    tags: { type: [String]},
     createdDate: { type: Date, default: Date.now }
 });
 
