@@ -31,8 +31,17 @@ async function editProblem(id, problemParam) {
     if (currentProblem.name !== problemParam.name && await Problem.findOne({ name: problemParam.name })) {
         throw 'Problem name "' + problemParam.name + '" is already taken';
     }
+
+    let oldTags = currentProblem.tags;
+    let newTags = problemParam.tags;
+
+    if (oldTags.includes(newTags)) {
+
+    }
     
     Object.assign(currentProblem, problemParam);
+
+    currentProblem.tags.push(...oldTags);
 
     await currentProblem.save();
 }
@@ -49,7 +58,8 @@ async function copyProblem(id, ownerID) {
         ownerID: ownerID,
         ownerName: newOwner.username,
         answers: currentProblem.answers,
-        private: currentProblem.private
+        private: currentProblem.private,
+        tags: currentProblem.tags
     });
 
     await newProblem.save();

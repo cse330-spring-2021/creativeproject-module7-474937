@@ -39,7 +39,6 @@ function copyProblem(req, res, next) {
 }
 
 function editProblem(req, res, next) {
-    console.log(req);
     problemService.editProblem(req.params.id, req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
