@@ -3,12 +3,14 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
 const Problem = db.Problem;
+const User = db.User;
 
 module.exports = {
     addProblem,
     editProblem,
     getAll,
     getById,
+    copyProblem,
     delete: _delete
 };
 
@@ -33,6 +35,23 @@ async function editProblem(id, problemParam) {
     Object.assign(currentProblem, problemParam);
 
     await currentProblem.save();
+}
+
+async function copyProblem(id, ownerId) {
+    const newOwner = await User.findById(ownerId);
+    const currentProblem = await Problem.findById(id);
+
+    if (!currentProblem) throw 'Problem not found';
+
+    let newProblem = new Problem();
+
+    Object.assign(newProblem, currentProblem);
+
+    newProblem.name = newProblem.name + " copy for " + newOwner.username;
+    newProblem.ownerID = ownerId;
+    newProblem.ownerName = newOwner.username;
+
+    await newProblem.save();
 }
 
 async function _delete(id) {

@@ -41,7 +41,7 @@
 <h3>All submitted problems:</h3>
 <ul>
     <li *ngFor="let problem of problems">
-        {{problem.name}} - <a (click)="copyProblem(problem.id)">Add to Collection</a> - <a (click)="deleteProblem(problem.id)" class="text-danger" *ngIf="problem.ownerName == currentUser.username">Delete</a>
+        {{problem.name}}<a (click)="copyProblem(problem.id)" *ngIf="problem.ownerName != currentUser.username"> - Add to Collection</a><a (click)="deleteProblem(problem.id)" class="text-danger" *ngIf="problem.ownerName == currentUser.username"> - Delete</a>
         <ul>
             <li>Owner: {{problem.ownerName}}</li>
             <li>Privacy: {{problem.private}}</li>

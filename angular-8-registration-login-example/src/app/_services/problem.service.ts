@@ -28,6 +28,10 @@ export class ProblemService {
         return this.http.put(`${config.apiUrl}/problems/${id}`, problem);
     }
 
+    copyProblem(id: number) {
+        return this.http.post(`${config.apiUrl}/problems/copyProblem`, id);
+    }
+
     deleteProblem(id: number) {
         return this.http.delete(`${config.apiUrl}/problems/${id}`);
     }

@@ -4,6 +4,7 @@ const problemService = require('./problem.service');
 
 // routes
 router.post('/addProblem', addProblem);
+router.post('/copyProblem', copyProblem);
 
 router.get('/', getAll);
 router.get('/:id', getById);
@@ -28,6 +29,12 @@ function addProblem(req, res, next) {
     problemService.addProblem(myProblem)
         .then(() => res.json({}))
         .catch(err => next(err));
+}
+
+function copyProblem(req, res, next) {
+    problemService.copyProblem(req.body.id, req.user.sub)
+    .then(() => res.json({}))
+    .catch(err => next(err));
 }
 
 function editProblem(req, res, next) {

@@ -44,6 +44,12 @@ export class HomeComponent implements OnInit {
             .subscribe(() => this.loadAllProblems());
     }
 
+    copyProblem(id: number) {
+        this.problemService.copyProblem(id)
+            .pipe(first())
+            .subscribe(() => this.loadAllProblems());
+    }
+
     private loadAllProblems() {
         this.problemService.getAllProblems()
             .pipe(first())
